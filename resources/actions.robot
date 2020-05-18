@@ -17,7 +17,7 @@ Quando submeto minhas credenciais "${email}" e "${pass}"
 
 Então devo ser autenticado
     Wait Until Element Is Visible       ${LOGGED_USER}
-    Element Text Should Be              ${LOGGED_USER}      Papito
+    Element Text Should Be              ${LOGGED_USER}      Vanessa
     
 Então devo ver a mensagem de alerta "${expect_alert}"
     Wait Until Element Is Visible       ${DIV_ALERT}

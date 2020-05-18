@@ -15,7 +15,7 @@ Test Teardown       After Test
 Usuário autenticado
     [tags]     success_login
     Dado que acesso a página login
-    Quando submeto minhas credenciais "papito@ninjapixel.com" e "pwd123"
+    Quando submeto minhas credenciais "vanessaredes@yahoo.com.br" e "123456"
     Então devo ser autenticado
 
     [Teardown]      Clear Local Storage
