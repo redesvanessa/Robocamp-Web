@@ -35,23 +35,12 @@ Dado que eu tenho um novo produto
 
     Remove Product by Title     ${product_json['title']}
 
-    Set Test Variable      ${product_json}
+    Set Test Variable           ${product_json}
 
 Quando eu cadastro deste produto
-    Wait Until Element Is Visible   ${ADD_PRODUCT}
-    Click Element                   ${ADD_PRODUCT}
+    ProductPage.Go To Add Form
 
-    Input Text      css:input[placeholder$="produto?"]      ${product_json['title']}
-    
-    #Seleciona Categoria
-    Click Element   css:input[placeholder^=Gat]       
-
-    Wait Until Element Is Visible   ${ADD_GATORIA}
-    Click Element                   ${ADD_GATORIA}
-
-    Input Text      css:input[name=price]            ${product_json['price']}
-
-    Click Element   id:create-product
+    ProductPage.Create New Product       
 
 Então devo ver este item na lista
     Table Should Contain        class:table          ${product_json['title']}  
