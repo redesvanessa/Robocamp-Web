@@ -8,13 +8,14 @@ ${base_url}         http://pixel-web:3000
 ## hooks
 Open Session
     Open Chrome
-    Set Window Size     1440    900
+    Set Window Size     1200    800
 
     Set Selenium Implicit Wait  5
 
 Login Session
     [Arguments]     ${email}       ${pass}
     Open Session
+    Go To           ${base_url}/login
     Login With      ${email}      ${pass}
 
 Close Session
