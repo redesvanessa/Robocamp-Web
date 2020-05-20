@@ -3,6 +3,7 @@ Documentation       Aqui teremos todas a palavras de ação dos testes autoamtiz
 
 Library     SeleniumLibrary
 Library     libs/database.py
+Library     OperatingSystem
 
 Resource    pages/BasePage.robot
 Resource    pages/SideBar.robot
@@ -37,9 +38,17 @@ Dado que eu tenho um novo produto
 
     Set Test Variable           ${product_json}
 
+Mas eu ja cadastrei esse item e não tinha lembrado
+    ProductPage.Go To Add Form
+    ProductPage.Create New Product      ${product_json}
+
 Quando faço o cadastro deste produto
     ProductPage.Go To Add Form
-    ProductPage.Create New Product    ${product_json}   
+    ProductPage.Create New Product      ${product_json}   
 
 Então devo ver este item na lista
-    Table Should Contain        class:table          ${product_json['title']}  
+    Table Should Contain        class:table                 ${product_json['title']}  
+
+Então devo ver a mensagem de alerta    
+    [Arguments]                         ${expect_alert} 
+    Wait Until Element Contains         ${ALERT_DANGER}     ${expect_alert} 
