@@ -9,6 +9,7 @@ Resource    pages/BasePage.robot
 Resource    pages/SideBar.robot
 Resource    pages/LoginPage.robot
 Resource    pages/ProductPage.robot
+Resource    helpers.robot
 
 ***Keywords***
 ## steps
@@ -30,9 +31,7 @@ Então devo ver a mensagem de alerta "${expect_alert}"
 
 Dado que eu tenho um novo produto
     [Arguments]     ${json_file}
-
-    ${string_file}=        Get File    ${EXECDIR}/resources/fixtures/${json_file}
-    ${product_json}=       Evaluate    json.loads($string_file)     json
+    ${product_json}=       Get Product Json   ${json_file}
 
     Remove Product by Title     ${product_json['title']}
 
@@ -52,3 +51,18 @@ Então devo ver este item na lista
 Então devo ver a mensagem de alerta    
     [Arguments]                         ${expect_alert} 
     Wait Until Element Contains         ${ALERT_DANGER}     ${expect_alert} 
+
+### Exclusão ###
+
+Dado que eu tenho o produto "${json_file}"
+    ${product_json}=       Get Product Json   ${json_file}
+
+    
+    Remove Product by Title     ${product_json['title']}
+
+    Set Test Variable           ${product_json}
+
+
+Quando eu solicito a Exclusão
+E confirmo a solicitação
+Então não devo ver esse item no catálogo
