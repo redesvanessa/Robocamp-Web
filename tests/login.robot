@@ -40,6 +40,7 @@ Senha não informada
     [Template]          Tentativa de login
     papito@ninjapixel.com       ${EMPTY}      Opps. Informe a sua senha!
 
+
 ***Keywords***
 Tentativa de login
     [Arguments]         ${input_email}      ${input_pass}       ${output_text}

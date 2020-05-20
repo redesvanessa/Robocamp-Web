@@ -25,7 +25,7 @@ Então devo ver a mensagem de alerta "${expect_alert}"
     Wait Until Element Is Visible       ${DIV_ALERT}
     Element Text Should Be              ${DIV_ALERT}     ${expect_alert}
 
-#### Cadastro de Produtos
+#### Cadastro de Produtos ####
 
 Dado que eu tenho um novo produto
     [Arguments]     ${json_file}
@@ -37,10 +37,9 @@ Dado que eu tenho um novo produto
 
     Set Test Variable           ${product_json}
 
-Quando eu cadastro deste produto
+Quando faço o cadastro deste produto
     ProductPage.Go To Add Form
-
-    ProductPage.Create New Product       
+    ProductPage.Create New Product    ${product_json}   
 
 Então devo ver este item na lista
     Table Should Contain        class:table          ${product_json['title']}  
