@@ -80,3 +80,8 @@ Então não devo ver esse item no catálogo
 
 Mas cancelo a solicitação
     Cancel Removal
+
+Então devo ver uma mensagem de alerta    
+    [Arguments]                         ${expect_alert} 
+    Wait Until Element Contains         xpath://span[contains(.,'Oops')]     ${expect_alert} 
+    Go To                               http://pixel-web:3000/admin/products

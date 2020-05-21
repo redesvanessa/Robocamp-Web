@@ -54,3 +54,4 @@ Select Category
 
     Wait Until Element Is Visible   xpath://li//span[text()='${cat}']
     Click Element                   xpath://li//span[text()='${cat}']
+
