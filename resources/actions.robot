@@ -12,7 +12,7 @@ Resource    pages/ProductPage.robot
 Resource    helpers.robot
 
 ***Keywords***
-## steps
+########## Steps ##########
 Dado que acesso a página login
     Go To       ${base_url}/login
 
@@ -27,7 +27,7 @@ Então devo ver a mensagem de alerta "${expect_alert}"
     Wait Until Element Is Visible       ${DIV_ALERT}
     Element Text Should Be              ${DIV_ALERT}     ${expect_alert}
 
-#### Cadastro de Produtos ####
+########## Cadastro de Produtos ##########
 
 Dado que eu tenho um novo produto
     [Arguments]     ${json_file}
@@ -52,17 +52,31 @@ Então devo ver a mensagem de alerta
     [Arguments]                         ${expect_alert} 
     Wait Until Element Contains         ${ALERT_DANGER}     ${expect_alert} 
 
-### Exclusão ###
+########## Exclusão ##########
 
-Dado que eu tenho o produto "${json_file}"
+Dado que "${json_file}" é um produto indesejado  
+#Implementando com o conceito de Shared Steps
+    #Dado que eu tenho um novo produto       ${json_file}
+    #Quando faço o cadastro deste produto
+
+#Implemetando chamando as Keywords
     ${product_json}=       Get Product Json   ${json_file}
-
     
     Remove Product by Title     ${product_json['title']}
-
+    
+    ProductPage.Go To Add Form
+    ProductPage.Create New Product      ${product_json}
+    
     Set Test Variable           ${product_json}
 
-
 Quando eu solicito a Exclusão
+    ProductPage.Request Removal     ${product_json['title']}
+
 E confirmo a solicitação
+    ProductPage.Confirm Removal
+
 Então não devo ver esse item no catálogo
+    Wait Until Element Does Not Contain     class:table     ${product_json['title']}
+
+Mas cancelo a solicitação
+    Cancel Removal

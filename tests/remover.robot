@@ -13,13 +13,14 @@ Test Teardown       After Test
 
 ***Test Cases***
 Apagar produto
-    Dado que eu tenho o produto "mario.json"
+    [Tags]      delete_product
+    Dado que "mario.json" é um produto indesejado
     Quando eu solicito a Exclusão
     E confirmo a solicitação
     Então não devo ver esse item no catálogo
 
 Desistir da remoção
-    Dado que eu tenho o produto "zelda.json"
+    Dado que "zelda.json" é um produto indesejado
     Quando eu solicito a Exclusão
     Mas cancelo a solicitação
     Então devo ver este item na lista
