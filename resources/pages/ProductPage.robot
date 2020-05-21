@@ -5,19 +5,15 @@ Documentation       ProductPage
 
 
 ***Variables***
-${PRODUCT_ADD}        class:product-add 
-${ALERT_DANGER}      class:alert-danger  
+${PRODUCT_ADD}          class:product-add 
+${ALERT_DANGER}         class:alert-danger  
+${INPUT_PRODUCERS}      class:producers
 
 ***Keywords***
 Go To Add Form
     Wait Until Element Is Visible   ${PRODUCT_ADD}
     Click Element                   ${PRODUCT_ADD}
-Select Category
-    [Arguments]      ${cat}
-    Click Element   css:input[placeholder^=Gat]       
 
-    Wait Until Element Is Visible   xpath://li//span[text()='${cat}']
-    Click Element                   xpath://li//span[text()='${cat}']
 Request Removal
     [Arguments]      ${title}
     Click Element    xpath://tr[td//text()[contains(., '${title}')]]//button  
@@ -27,14 +23,34 @@ Confirm Removal
 
 Cancel Removal
     Click Element    class:swal2-cancel 
-    
+
 Create New Product
     [Arguments]         ${product_json}
 
     Input Text          css:input[placeholder$="produto?"]      ${product_json['title']}
-
-    Select Category     ${product_json['cat']}
-    
-    Input Text          css:input[name=price]            ${product_json['price']}
-
+    Select Category     ${product_json['cat']}    
+    Input Text          css:input[name=price]                   ${product_json['price']}
+    Input Producers     ${product_json['producers']}
+    Input Text          css:textarea[name=description]          ${product_json['desc']}
+    Upload Photo        ${product_json['image_file']}
     Click Element       id:create-product
+Upload Photo
+    [Arguments]      ${file_name}
+
+    ${image_file}=      Set Variable    ${EXECDIR}/resources/fixtures/images/${file_name}
+    Choose file         id:upcover      ${image_file}
+
+Input Producers
+    [Arguments]      ${producers}
+    
+    FOR     ${P}    IN        @{producers}
+            Input Text        ${INPUT_PRODUCERS}         ${P}
+            Press Keys        ${INPUT_PRODUCERS}         TAB
+    END
+
+Select Category
+    [Arguments]      ${cat}
+    Click Element   css:input[placeholder^=Gat]       
+
+    Wait Until Element Is Visible   xpath://li//span[text()='${cat}']
+    Click Element                   xpath://li//span[text()='${cat}']
