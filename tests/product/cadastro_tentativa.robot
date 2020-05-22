@@ -21,7 +21,7 @@ Tentar cadastrar produtos
 
 ***Test Cases***
 Nome não informado              no_title.json       Oops - Informe o nome do produto!
-#Categoria não selecionada       no_cat.json         Oops - Selecione uma categoria!
 Preço não informado             no_price.json       Oops - Informe o preço também!
+#Categoria não selecionada       no_cat.json         Oops - Selecione uma categoria!
 
 
