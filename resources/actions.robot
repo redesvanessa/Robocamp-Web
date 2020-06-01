@@ -6,10 +6,8 @@ Library     libs/database.py
 Library     OperatingSystem
 
 Resource    pages/BasePage.robot
-Resource    pages/SideBar.robot
-Resource    pages/LoginPage.robot
-Resource    pages/ProductPage.robot
 Resource    helpers.robot
+
 
 ***Keywords***
 ########## Steps ##########
@@ -24,13 +22,13 @@ Então devo ser autenticado
     Wait Until Element Contains         ${LOGGED_USER}      Vanessa
     
 Então devo ver a mensagem de alerta "${expect_alert}"
-    Wait Until Element Is Visible       ${DIV_ALERT}
-    Element Text Should Be              ${DIV_ALERT}     ${expect_alert}
+    Wait Until Element Is Visible       ${ALERT}
+    Element Text Should Be              ${ALERT}     ${expect_alert}
 
 ########## Cadastro de Produtos ##########
 
 Dado que eu tenho um novo produto
-    [Arguments]     ${json_file}
+    [Arguments]     ${json_file}       
     ${product_json}=       Get Product Json   ${json_file}
 
     Remove Product by Title     ${product_json['title']}
@@ -39,16 +37,19 @@ Dado que eu tenho um novo produto
 
 Mas eu ja cadastrei esse item e não tinha lembrado
     ProductPage.Go To Add Form
-    ProductPage.Create New Product      ${product_json}
+    ProductPage.Create New Product      ${product_json}     
 
 Quando faço o cadastro deste produto
     ProductPage.Go To Add Form
     ProductPage.Create New Product      ${product_json}   
 
+Quando tento cadastrar esse produto
+    ProductPage.Create New Product      ${product_json}
+
 Então devo ver este item na lista
     Table Should Contain        class:table                 ${product_json['title']}  
 
-Então devo ver a mensagem de alerta    
+Então devo ver a mensagem de erro    
     [Arguments]                         ${expect_alert} 
     Wait Until Element Contains         ${ALERT_DANGER}     ${expect_alert} 
 
@@ -81,7 +82,7 @@ Então não devo ver esse item no catálogo
 Mas cancelo a solicitação
     Cancel Removal
 
-Então devo ver uma mensagem de alerta    
+Então devo ver uma mensagem informativa    
     [Arguments]                         ${expect_alert} 
-    Wait Until Element Contains         xpath://span[contains(.,'Oops')]     ${expect_alert} 
-    Go To                               http://pixel-web:3000/admin/products
+    Wait Until Element Contains         ${ALERT_INFO}     ${expect_alert} 
+   # Go To                               http://pixel-web:3000/admin/products

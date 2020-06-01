@@ -14,14 +14,14 @@ Test Teardown       After Test
 ***Test Cases***
 Novo produto
     [Tags]          new_product
-    Dado que eu tenho um novo produto   dk.json
+    Dado que eu tenho um novo produto   dk.json     with_cat
     Quando faço o cadastro deste produto
     Então devo ver este item na lista
 
 Produto duplicado      
     [Tags]          dup
-    Dado que eu tenho um novo produto   master.json
+    Dado que eu tenho um novo produto       master.json     with_cat
     Mas eu ja cadastrei esse item e não tinha lembrado
     Quando faço o cadastro deste produto
-    Então devo ver a mensagem de alerta     Oops - Este produto já foi cadastrado!
+    Então devo ver a mensagem de erro       Oops - Este produto já foi cadastrado!
 

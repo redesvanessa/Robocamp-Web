@@ -2,9 +2,7 @@
     "title": "Zelda",
     "cat": "",
     "price": "39.99",
-    "desc": "Um jogo muito chato...",
-    "producers": [
-        "Nintendo",
-        "Rare"
-    ],    "image_file": "zelda.jpg"
+    "desc": "",
+    "producers": [], 
+    "image_file": ""
 }

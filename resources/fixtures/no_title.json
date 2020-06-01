@@ -2,10 +2,7 @@
     "title": "",
     "cat": "Super Nintendo",
     "price": "99.99",
-    "desc": "Tiros para todo lado",
-    "producers": [
-        "Nintendo",
-        "Rare"
-    ],
-    "image_file": "contra.jpg"
+    "desc": "",
+    "producers": [],
+    "image_file": ""
 }
